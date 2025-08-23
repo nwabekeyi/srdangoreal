@@ -1,0 +1,344 @@
+/* responsive.css */
+
+/* Scroll Up Area */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  #scrollUp {
+    bottom: var(--spacing-small); /* 30px */
+    right: var(--spacing-small); /* 30px */
+    height: var(--spacing-medium); /* 50px */
+    width: var(--spacing-medium); /* 50px */
+    line-height: 46px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (max-width: 767px) {
+  #scrollUp {
+    bottom: var(--spacing-small); /* 30px */
+    right: var(--spacing-small); /* 30px */
+    height: var(--spacing-medium); /* 50px */
+    width: var(--spacing-medium); /* 50px */
+    line-height: 46px; /* No direct variable match, retained */
+  }
+}
+
+/* Section Heading Area */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .section-heading h2 {
+    font-size: 24px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .section-heading h2 {
+    font-size: 24px; /* No direct variable match, retained */
+  }
+}
+
+/* Header Area */
+@media only screen and (max-width: 767px) {
+  .top-header-area {
+    height: auto;
+  }
+  .top-header-area .email-address {
+    padding: var(--spacing-xsmall) var(--spacing-small); /* 15px 30px */
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .main-header-area {
+    height: 70px; /* No direct variable match, retained */
+  }
+  .main-header-area .classy-navbar {
+    height: 70px; /* No direct variable match, retained */
+  }
+  .main-header-area .searchbtn {
+    margin-left: 0;
+    height: var(--spacing-medium); /* 50px */
+    width: 100%;
+    margin-top: var(--spacing-xsmall); /* 15px */
+    line-height: var(--spacing-medium); /* 50px */
+    background-color: var(--primary-color);
+  }
+}
+@media only screen and (max-width: 767px) {
+  .main-header-area {
+    height: 70px; /* No direct variable match, retained */
+  }
+  .main-header-area .classy-navbar {
+    height: 70px; /* No direct variable match, retained */
+    padding: 0.5em var(--spacing-small); /* 30px */
+  }
+  .main-header-area .searchbtn {
+    margin-left: 0;
+    height: var(--spacing-medium); /* 50px */
+    width: 100%;
+    margin-top: var(--spacing-xsmall); /* 15px */
+    line-height: var(--spacing-medium); /* 50px */
+    background-color: var(--primary-color);
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .main-header-area .nav-brand {
+    margin-right: 0;
+  }
+  .main-header-area .searchbtn {
+    margin-left: var(--spacing-xsmall); /* 15px */
+    width: var(--spacing-medium); /* 50px */
+  }
+  .main-header-area .south-search-form input {
+    width: 550px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .main-header-area .south-search-form input {
+    width: calc(100% - var(--spacing-small)); /* 30px */
+    margin: 0 var(--spacing-xsmall); /* 15px */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .main-header-area .south-search-form input {
+    width: calc(100% - var(--spacing-small)); /* 30px */
+    margin: 0 var(--spacing-xsmall); /* 15px */
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .is-sticky .main-header-area {
+    height: 70px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .is-sticky .main-header-area {
+    height: 70px; /* No direct variable match, retained */
+  }
+}
+
+/* Welcome Area */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .single-hero-slide {
+    height: 700px; /* Matches --height-700, but retained for specificity */
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .single-hero-slide {
+    height: 650px; /* No direct variable match, retained */
+  }
+  .hero-slides-content h2 {
+    font-size: 40px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .single-hero-slide {
+    height: 550px; /* No direct variable match, retained */
+  }
+  .hero-slides-content h2 {
+    font-size: 16px; /* No direct variable match, retained */
+  }
+  .hero-area .owl-prev,
+  .hero-area .owl-next {
+    left: var(--spacing-small); /* 30px */
+  }
+  .hero-area .owl-next {
+    left: auto;
+    right: var(--spacing-small); /* 30px */
+  }
+  .hero-area .owl-dots {
+    width: calc(100% - var(--spacing-small)); /* 30px */
+    left: 20px; /* No direct variable match, retained */
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+}
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+  .hero-slides-content h2 {
+    font-size: 24px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .hero-area .owl-dots {
+    width: calc(100% - 6%); /* No direct variable match, retained */
+    left: 5%; /* No direct variable match, retained */
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .hero-area .owl-dots {
+    width: calc(100% - 6%); /* No direct variable match, retained */
+    left: 5%; /* No direct variable match, retained */
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+  }
+}
+
+/* Advanced Search Area */
+@media only screen and (max-width: 767px) {
+  .south-search-area .advanced-search-form {
+    padding: var(--spacing-small) 20px; /* 30px 20px */
+  }
+  .south-search-area .advanced-search-form .search-title {
+    width: 210px; /* No direct variable match, retained */
+    padding: 0 var(--spacing-xsmall); /* 15px */
+  }
+  .south-search-area .advanced-search-form .slider-range {
+    margin-bottom: var(--spacing-medium); /* 50px */
+  }
+  .south-search-area .advanced-search-form .range {
+    font-size: var(--font-size-small); /* 12px, adjusted to 10px in original, retained */
+  }
+}
+
+/* Single Featured Property */
+@media only screen and (max-width: 767px) {
+  .single-featured-property .property-content .property-meta-data img {
+    margin-right: 0;
+  }
+}
+
+/* Testimonials Area */
+@media only screen and (max-width: 767px) {
+  .testimonials-slides .owl-prev,
+  .testimonials-slides .owl-next {
+    left: 0;
+  }
+  .testimonials-slides .owl-next {
+    left: auto;
+    right: 0;
+  }
+}
+
+/* Editor Area */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .south-editor-area {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .south-editor-area .editor-content-area,
+  .south-editor-area .editor-thumbnail {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .south-editor-area {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+  .south-editor-area .editor-content-area,
+  .south-editor-area .editor-thumbnail {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+}
+
+/* Call to Action Area */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .call-to-action-area {
+    height: 500px; /* Matches --height-500, but retained for specificity */
+  }
+  .call-to-action-area .cta-content h2 {
+    font-size: 30px; /* No direct variable match, retained */
+  }
+  .call-to-action-area .cta-content h6 {
+    font-size: 18px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .call-to-action-area {
+    height: 500px; /* Matches --height-500, but retained for specificity */
+  }
+  .call-to-action-area .cta-content h2 {
+    font-size: 24px; /* No direct variable match, retained */
+  }
+  .call-to-action-area .cta-content h6 {
+    font-size: 16px; /* No direct variable match, retained */
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .call-to-action-area .cta-content h2 {
+    font-size: 40px; /* No direct variable match, retained */
+  }
+  .call-to-action-area .cta-content h6 {
+    font-size: 24px; /* No direct variable match, retained */
+  }
+}
+
+/* About Us Area */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .about-content-wrapper .about-content {
+    margin-bottom: var(--spacing-large); /* 100px */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .about-content-wrapper .about-content {
+    margin-bottom: var(--spacing-large); /* 100px */
+  }
+}
+
+/* Listings Area */
+@media only screen and (max-width: 767px) {
+  .listings-top-meta span {
+    font-size: 11px; /* No direct variable match, retained */
+  }
+  .listings-content h5 {
+    font-size: 20px; /* No direct variable match, retained */
+  }
+  .listings-content .property-meta-data img {
+    margin-right: 0;
+  }
+  .listings-content .listings-core-features li {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+    min-width: 100%;
+  }
+}
+
+/* Contact Realtor Wrapper */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .contact-realtor-wrapper .realtor---info {
+    padding: 40px var(--spacing-small); /* 30px */
+  }
+  .contact-realtor-wrapper .realtor--contact-form {
+    padding: 0 var(--spacing-small) 40px; /* 30px */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .contact-realtor-wrapper .realtor---info {
+    padding: 40px var(--spacing-small); /* 30px */
+  }
+  .contact-realtor-wrapper .realtor--contact-form {
+    padding: 0 var(--spacing-small) 40px; /* 30px */
+  }
+}
+
+/* Comment/Contact Area */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .leave-comment-area .comment-form,
+  .leave-comment-area .contact-form,
+  .south-contact-area .comment-form,
+  .south-contact-area .contact-form {
+    margin-bottom: var(--spacing-large); /* 100px */
+  }
+}
+@media only screen and (max-width: 767px) {
+  .leave-comment-area .comment-form,
+  .leave-comment-area .contact-form,
+  .south-contact-area .comment-form,
+  .south-contact-area .contact-form {
+    margin-bottom: var(--spacing-large); /* 100px */
+  }
+  .single_comment_area .comment-wrapper .comment-author {
+    margin-right: var(--spacing-xsmall); /* 10px */
+  }
+  .single_comment_area .children {
+    padding-left: var(--spacing-small); /* 30px */
+  }
+}
+
+/* Tabs Area */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+  .south-tabs-content .nav-tabs .nav-link {
+    padding: 0 var(--spacing-xsmall); /* 10px */
+  }
+}
