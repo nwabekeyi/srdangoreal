@@ -1,62 +1,38 @@
+// functions/home.js
+import { getAllDocs } from '../../../utils/queries/index.js';
 
-
-// Dummy data for analytics
-const dummyAnalytics = {
-    totalProperties: 50,
-    forSale: 30,
-    forRent: 20,
-    totalBlogs: 10,
-    totalReplies: 50,
-    categoryViews: { 'For Sale': 1500, 'For Rent': 1000 },
-  };
-
-
-      // Sidebar navigation
-  export const sidebarNav =  () => {
-    const navLinks = document.querySelectorAll('.sidebar .nav-link');
-    const sections = document.querySelectorAll('.content-section');
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const sectionId = link.getAttribute('data-section');
-          sections.forEach(section => section.style.display = 'none');
-          document.getElementById(sectionId).style.display = 'block';
-          navLinks.forEach(l => l.classList.remove('active'));
-          link.classList.add('active');
-          if (window.innerWidth <= 767.98) {
-            document.getElementById('sidebar').classList.remove('show');
-          }
-        });
-      });
-  };
-
-  // Load analytics with dummy data
 let categoryChartInstance;
 let performanceChartInstance;
 
-export function loadAnalytics() {
+export async function loadAnalytics() {
   try {
-    const {
-      totalProperties,
-      forSale,
-      forRent,
-      totalBlogs,
-      totalReplies,
-      categoryViews,
-    } = dummyAnalytics;
+    // Fetch properties and blogs from Firestore
+    const properties = await getAllDocs('properties');
+    const blogs = await getAllDocs('blogs');
 
+    // Calculate analytics
+    const totalProperties = properties.length;
+    const forSale = properties.filter(p => p.tag === 'For Sale').length;
+    const forRent = properties.filter(p => p.tag === 'For Rent').length;
+    const totalBlogs = blogs.length;
+    const totalReplies = blogs.reduce((sum, blog) => sum + (blog.replies || 0), 0);
+    const categoryViews = {
+      'For Sale': properties.filter(p => p.tag === 'For Sale').reduce((sum, p) => sum + (p.views || 0), 0),
+      'For Rent': properties.filter(p => p.tag === 'For Rent').reduce((sum, p) => sum + (p.views || 0), 0),
+    };
+
+    // Update DOM
     document.getElementById('total-properties').textContent = totalProperties;
     document.getElementById('for-sale').textContent = forSale;
     document.getElementById('for-rent').textContent = forRent;
     document.getElementById('total-blogs').textContent = totalBlogs;
     document.getElementById('total-replies').textContent = totalReplies;
 
-    // 🔴 Destroy existing charts if they exist
+    // Destroy existing charts if they exist
     if (categoryChartInstance) categoryChartInstance.destroy();
     if (performanceChartInstance) performanceChartInstance.destroy();
 
-    // ✅ Recreate fresh charts
+    // Create charts
     categoryChartInstance = new Chart(document.getElementById('category-chart'), {
       type: 'pie',
       data: {
@@ -92,4 +68,24 @@ export function loadAnalytics() {
   } catch (err) {
     console.error('Error loading analytics:', err);
   }
+}
+
+// Sidebar navigation
+export const sidebarNav = () => {
+  const navLinks = document.querySelectorAll('.sidebar .nav-link');
+  const sections = document.querySelectorAll('.content-section');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const sectionId = link.getAttribute('data-section');
+      sections.forEach(section => section.style.display = 'none');
+      document.getElementById(sectionId).style.display = 'block';
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+      if (window.innerWidth <= 767.98) {
+        document.getElementById('sidebar').classList.remove('show');
+      }
+    });
+  });
 }

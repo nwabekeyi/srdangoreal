@@ -1,5 +1,5 @@
-// firebase.js
-import { firebaseConfig } from './secrets.js';
+// configs/firebase.js
+import { firebaseConfig } from '../secrets.js';
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
 import {
   getAuth,
@@ -16,6 +16,10 @@ import {
   collection,
   getDocs,
   deleteDoc,
+  query,
+  where,
+  limit,
+  startAfter,
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
 // Initialize Firebase
@@ -40,4 +44,8 @@ export {
   collection,
   getDocs,
   deleteDoc,
+  query,
+  where,
+  limit,
+  startAfter,
 };

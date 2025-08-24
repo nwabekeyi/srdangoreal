@@ -1842,6 +1842,12 @@ img {
   margin-bottom: 0;
 }
 
+footer, 
+footer * {
+  color: #fff !important;
+}
+
+
 /* Tabs CSS */
 .south-tabs-content {
   position: relative;

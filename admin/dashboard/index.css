@@ -8,9 +8,9 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif; /* Match login font */
-    background-color: #080710; /* Dark background from login */
-    color: #ffffff; /* White text for contrast */
+    font-family: 'Poppins', sans-serif;
+    background-color: #080710;
+    color: #ffffff;
 }
 
 /* Background Shapes for Visual Appeal */
@@ -50,7 +50,7 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
-    background-color: rgba(255, 255, 255, 0.13); /* Translucent glassmorphism */
+    background-color: rgba(255, 255, 255, 0.13);
     backdrop-filter: blur(10px);
     border-right: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
@@ -80,7 +80,7 @@ body {
 
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.27); /* Match login hover */
+    background-color: rgba(255, 255, 255, 0.27);
     transform: translateX(5px);
 }
 
@@ -142,7 +142,7 @@ body {
 
 /* Analytics Cards */
 .card {
-    background-color: rgba(255, 255, 255, 0.13); /* Glassmorphism */
+    background-color: rgba(255, 255, 255, 0.13);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -162,17 +162,17 @@ body {
 .card-title {
     font-size: 1.2rem;
     font-weight: 500;
-    color: #ffffff; /* White text */
+    color: #ffffff;
 }
 
 .card-text.display-4 {
-    color: #23a2f6; /* Gradient-inspired color */
+    color: #23a2f6;
     font-weight: 600;
 }
 
 /* Forms (Properties and Blogs) */
 .admin-form {
-    background-color: rgba(255, 255, 255, 0.13); /* Match login form */
+    background-color: rgba(255, 255, 255, 0.13);
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -251,7 +251,7 @@ body {
 }
 
 .error {
-    color: #ff0000; /* Match login .text-danger */
+    color: #ff0000;
     font-size: 14px;
     text-align: center;
     margin-top: 10px;
@@ -407,21 +407,59 @@ canvas {
     height: 100%;
     background-color: #080710;
     z-index: 2000;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease-out;
+}
+
+#preloader.hidden {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .south-load {
-    width: 50px;
-    height: 50px;
-    border: 5px solid #23a2f6;
-    border-top: 5px solid transparent;
+    position: relative;
+    width: 60px;
+    height: 60px;
+}
+
+.south-load::before,
+.south-load::after {
+    content: '';
+    position: absolute;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    border: 5px solid transparent;
+    border-top-color: #23a2f6;
+    border-bottom-color: #ff512f;
+    animation: spin 1.2s linear infinite;
+}
+
+.south-load::before {
+    width: 60px;
+    height: 60px;
+}
+
+.south-load::after {
+    width: 45px;
+    height: 45px;
+    top: 7.5px;
+    left: 7.5px;
+    animation-direction: reverse;
 }
 
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Loading and Alert Styles */
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+}
+
+.alert {
+    margin-top: 1rem;
 }

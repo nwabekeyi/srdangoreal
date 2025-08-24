@@ -12,12 +12,11 @@
     <link rel="stylesheet" href="index.css">
 </head>
 
-
 <body>
     <!-- Preloader -->
-    <!-- <div id="preloader">
+    <div id="preloader">
         <div class="south-load"></div>
-    </div> -->
+    </div>
 
     <!-- Main Content -->
     <div class="d-flex">
@@ -139,20 +138,24 @@
                                 <textarea class="form-control" id="description" required></textarea>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="price">Price</label>
+                                <label for="price">Price (₦)</label>
                                 <input type="number" class="form-control" id="price" required>
                             </div>
-                            <div class="form-group mb-3">
-                                <label for="image">Image</label>
-                                <input type="file" class="form-control" id="image" accept="image/*">
+                            <div class="form-group mb-3" id="imageInputs">
+                                <label>Images</label>
+                                <div class="image-input-group mb-2">
+                                    <input type="file" class="form-control image-input" name="images" accept="image/*" required>
+                                    <button type="button" class="btn btn-danger btn-sm remove-image mt-1">Remove</button>
+                                </div>
                             </div>
+                            <button type="button" class="btn btn-secondary mb-3" id="addImage">Add Another Image</button>
                             <div class="form-group mb-3">
                                 <label for="bathrooms">Bathrooms</label>
                                 <input type="number" class="form-control" id="bathrooms" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="garage">Garage Spaces</label>
-                                <input type="number" class="form-control" id="garage" required>
+                                <input type="file" class="form-control" id="garage" required>
                             </div>
                             <div class="form-group mb-3">
                                 <label for="space">Space (sq ft)</label>
@@ -161,9 +164,14 @@
                             <div class="form-group mb-3">
                                 <label for="tag">Tag</label>
                                 <select class="form-control" id="tag" required>
+                                    <option value="" disabled selected>Select Tag</option>
                                     <option value="For Sale">For Sale</option>
                                     <option value="For Rent">For Rent</option>
                                 </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="coreFeatures">Core Features (comma-separated, e.g., Gated Community, Fireplace)</label>
+                                <input type="text" class="form-control" id="coreFeatures" placeholder="Enter features separated by commas">
                             </div>
                             <button type="submit" class="btn btn-primary">Save Property</button>
                             <div id="error" class="error mt-3"></div>
@@ -223,5 +231,34 @@
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/active.js"></script>
     <script src="index.js" type="module"></script>
+    <script>
+        // Dynamic image input fields
+        document.addEventListener('DOMContentLoaded', () => {
+            const imageInputsContainer = document.getElementById('imageInputs');
+            const addImageButton = document.getElementById('addImage');
+
+            addImageButton.addEventListener('click', () => {
+                const imageInputGroup = document.createElement('div');
+                imageInputGroup.className = 'image-input-group mb-2';
+                imageInputGroup.innerHTML = `
+                    <input type="file" class="form-control image-input" name="images" accept="image/*">
+                    <button type="button" class="btn btn-danger btn-sm remove-image mt-1">Remove</button>
+                `;
+                imageInputsContainer.appendChild(imageInputGroup);
+
+                // Add event listener to the new remove button
+                imageInputGroup.querySelector('.remove-image').addEventListener('click', () => {
+                    imageInputGroup.remove();
+                });
+            });
+
+            // Handle existing remove buttons
+            imageInputsContainer.addEventListener('click', (e) => {
+                if (e.target.classList.contains('remove-image')) {
+                    e.target.parentElement.remove();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

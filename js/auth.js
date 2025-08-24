@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   doc,
   getDoc,
-} from '../../app.js'; // Import Firebase services from your firebase module
+} from '../configs/firebase.js'; // Import Firebase services from your firebase module
 
 document.addEventListener('DOMContentLoaded', () => {
   // Get form and error elements
