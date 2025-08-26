@@ -4,6 +4,7 @@ import {
     createDoc,
     updateDoc,
     deleteDocById,
+    fetchAddressSuggestions
   } from '../../../utils/queries/index.js';
   import { uploadFile } from '../../../configs/cloudinary.js';
   import { loadAnalytics } from './home.js';
@@ -148,24 +149,7 @@ import {
     }
   }
   
-  // Function to fetch address suggestions from MapTiler Geocoding API
-  async function fetchAddressSuggestions(query) {
-    try {
-        const apiKey = 'dVgVEUYmDxNW6RfZtsfg'; // Replace with your MapTiler API key or inject securely
-        const response = await fetch(
-            `https://api.maptiler.com/geocoding/${encodeURIComponent(query)}.json?key=${apiKey}&limit=5`,
-            {
-                method: 'GET',
-            }
-        );
-        const data = await response.json();
-        return data.features || [];
-    } catch (error) {
-        console.error('Error fetching address suggestions:', error);
-        return [];
-    }
-  }
-  
+
   // Throttle function to limit API calls to once every specified interval
   function throttle(func, limit) {
     let inThrottle;

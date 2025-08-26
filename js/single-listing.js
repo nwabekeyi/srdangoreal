@@ -1,10 +1,13 @@
 import { getPropertyDetails } from '../utils/storage/index.js';
 import { showLoader, removeLoader } from '../utils/loader/index.js';
+import { fetchAddressSuggestions } from '../utils/queries/index.js';
+import { initMap } from './map-active.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const listingsContent = document.querySelector('.listings-content');
   const mainSlider = document.querySelector('.main-slider');
   const thumbnailContainer = document.querySelector('.thumbnail-container');
+  const mapContainer = document.getElementById('map');
 
   try {
     showLoader();
@@ -14,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       listingsContent.innerHTML = '<p class="text-center">No property details found. Please select a property.</p>';
       mainSlider.innerHTML = ''; // Clear main slider
       thumbnailContainer.innerHTML = ''; // Clear thumbnail container
+      if (mapContainer) mapContainer.style.display = 'none'; // Hide map on error
       return;
     }
 
@@ -138,11 +142,30 @@ document.addEventListener('DOMContentLoaded', () => {
           : '<li>No features available</li>'}
       </ul>
     `;
+
+    // Initialize MapTiler map
+    let coordinates;
+    if (property.lat && property.lng) {
+      coordinates = { lng: property.lng, lat: property.lat };
+    } else {
+      // Geocode the location using MapTiler
+      const suggestions = await fetchAddressSuggestions(property.location);
+      if (suggestions.length > 0) {
+        coordinates = suggestions[0].center; // [lng, lat]
+        coordinates = { lng: coordinates[0], lat: coordinates[1] }; // Convert to { lng, lat }
+      } else {
+        console.warn('No coordinates found for location:', property.location);
+        coordinates = { lng: 3.3792, lat: 6.5244 }; // Fallback to Lagos, Nigeria
+      }
+    }
+    console.log('Coordinates before initMap:', coordinates); // Debugging
+    initMap(coordinates, property.title);
   } catch (err) {
     console.error('Error loading single listing:', err);
     listingsContent.innerHTML = '<p class="text-center">Error loading property details. Please try again.</p>';
     mainSlider.innerHTML = ''; // Clear main slider on error
     thumbnailContainer.innerHTML = ''; // Clear thumbnail container on error
+    if (mapContainer) mapContainer.style.display = 'none'; // Hide map on error
   } finally {
     removeLoader();
   }

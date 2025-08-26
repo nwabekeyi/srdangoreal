@@ -34,7 +34,7 @@ import { submitBlog, loadBlogs } from './components/blog.js';document.addEventLi
   logoutBtn.addEventListener('click', async () => {
     try {
       await auth.signOut();
-      window.location.href = 'login.html';
+      window.location.href = '../index.html';
     } catch (err) {
       console.error('Logout failed:', err);
     }

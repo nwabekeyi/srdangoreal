@@ -1,5 +1,6 @@
 import { db, doc, setDoc, getDoc, collection, getDocs, deleteDoc, query, limit, startAfter } from '../../configs/firebase.js';
 import { showLoader, removeLoader } from '../loader/index.js';
+import { mapTilerKey } from '../../secrets.js';
 
 // Helper function to handle errors
 const handleError = (operation, error) => {
@@ -154,3 +155,28 @@ export const deleteDocById = async (collectionName, docId) => {
     removeLoader();
   }
 };
+
+// Fetch address suggestions using MapTiler Geocoding API
+export async function fetchAddressSuggestions(query) {
+  try {
+    const apiKey = mapTilerKey; // Ensure mapTilerKey is correctly imported
+    const response = await fetch(
+      `https://api.maptiler.com/geocoding/${encodeURIComponent(query)}.json?key=${apiKey}&limit=5`,
+      {
+        method: 'GET',
+      }
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.features.map(feature => ({
+      place_name: feature.place_name,
+      center: feature.center, // [lng, lat]
+      bbox: feature.bbox // Optional: bounding box for zooming
+    })) || [];
+  } catch (error) {
+    console.error('Error fetching address suggestions:', error);
+    return [];
+  }
+}

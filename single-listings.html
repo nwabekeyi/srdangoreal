@@ -8,17 +8,17 @@
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://crystallandacademy.com/">
+    <meta property="og:url" content="https://srdango.com/">
     <meta property="og:title" content="S.R Dango - Real Estate in Lagos, Nigeria">
     <meta property="og:description" content="Trusted real estate agency in Lagos. Find apartments, houses, and lands for sale or rent in prime locations across Nigeria.">
-    <meta property="og:image" content="https://crystallandacademy.com/img/seo/real-estate-lagos.jpg">
+    <meta property="og:image" content="https://srdango.com/img/seo/real-estate-lagos.jpg">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://crystallandacademy.com/">
+    <meta name="twitter:url" content="https://srdango.com/">
     <meta name="twitter:title" content="S.R Dango - Real Estate in Lagos, Nigeria">
     <meta name="twitter:description" content="Explore apartments, houses, and lands for sale or rent in Lagos, Nigeria with S.R Dango. Trusted real estate experts.">
-    <meta name="twitter:image" content="https://crystallandacademy.com/img/seo/real-estate-lagos.jpg">
+    <meta name="twitter:image" content="https://srdango.com/img/seo/real-estate-lagos.jpg">
 
     <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
@@ -28,6 +28,8 @@
     <!-- Slick Carousel CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <!-- MapTiler SDK CSS -->
+    <link rel="stylesheet" href="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.0/maptiler-sdk.css"/>
 </head>
 
 <body>
@@ -113,7 +115,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="listings-maps mt-100">
-                        <div id="googleMap"></div>
+                        <div id="map" style="height: 400px;"></div>
                     </div>
                 </div>
             </div>
@@ -137,13 +139,13 @@
     <script src="js/jquery-ui.min.js"></script>
     <!-- Active js -->
     <script src="js/active.js"></script>
-    <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
-    <script src="js/map-active.js"></script>
+    <!-- MapTiler SDK -->
+    <script src="https://cdn.maptiler.com/maptiler-sdk-js/v2.0.0/maptiler-sdk.umd.min.js"></script>
     <!-- Slick Carousel JS -->
     <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- Application Scripts -->
     <script src="index.js" type="module"></script>
     <script src="js/single-listing.js" type="module"></script>
+    <script src="js/map-active.js" type="module"></script>
 </body>
 </html>

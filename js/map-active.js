@@ -1,41 +1,33 @@
-var map;
-var latlng = new google.maps.LatLng(56.9496, 24.1052);
-var stylez = [{
-    featureType: "all",
-    elementType: "all",
-    stylers: [{
-        saturation: -25
-            }]
-        }];
-var mapOptions = {
-    zoom: 15,
-    center: latlng,
-    scrollwheel: false,
-    scaleControl: false,
-    disableDefaultUI: true,
-    mapTypeControlOptions: {
-        mapTypeIds: [google.maps.MapTypeId.ROADMAP, 'gMap']
-    }
-};
-map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-var geocoder_map = new google.maps.Geocoder();
-var address = 'Riga';
-geocoder_map.geocode({
-    'address': address
-}, function (results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
-        map.setCenter(results[0].geometry.location);
-        var marker = new google.maps.Marker({
-            map: map,
-            icon: '',
-            position: map.getCenter()
-        });
-    } else {
-        alert("Geocode was not successful for the following reason: " + status);
-    }
-});
-var mapType = new google.maps.StyledMapType(stylez, {
-    name: "Grayscale"
-});
-map.mapTypes.set('gMap', mapType);
-map.setMapTypeId('gMap');
+import { mapTilerKey } from '../secrets.js';
+
+export function initMap(coordinates, title) {
+    console.log(coordinates)
+  const mapContainer = document.getElementById('map');
+  if (!mapContainer) {
+    console.error('Map container not found (#map)');
+    return;
+  }
+
+  try {
+    // Initialize MapTiler map
+    maptilersdk.config.apiKey = mapTilerKey;
+    const map = new maptilersdk.Map({
+      container: 'map',
+      style: maptilersdk.MapStyle.STREETS, // Default streets style
+      center: [coordinates.lng, coordinates.lat],
+      zoom: 14, // Adjust zoom level for property view
+    });
+
+    // Add a marker
+    new maptilersdk.Marker()
+      .setLngLat([coordinates.lng, coordinates.lat])
+      .setPopup(
+        new maptilersdk.Popup({ offset: 25 })
+          .setHTML(`<h5>${title}</h5><p>${coordinates.lat.toFixed(4)}, ${coordinates.lng.toFixed(4)}</p>`)
+      )
+      .addTo(map);
+  } catch (err) {
+    console.error('Error initializing MapTiler map:', err);
+    mapContainer.style.display = 'none'; // Hide map on error
+  }
+}

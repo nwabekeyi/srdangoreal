@@ -31,7 +31,6 @@ export async function injectAdvancedSearch() {
         cities: ['All Cities'],
         categories: ['All Categories'],
         listings: ['All Listings'],
-        types: [{ value: 'All Types', label: 'All Types' }],
         offers: ['All Offers']
       };
     }
@@ -127,22 +126,7 @@ export async function injectAdvancedSearch() {
                       <div class="range">10 mil - 1300 mil</div>
                     </div>
                   </div>
-                  <div class="col-12 search-form-second-steps d-none">
-                    <div class="row">
-                      <div class="col-12 col-md-4 col-lg-3">
-                        <div class="form-group">
-                          <select class="form-control" id="types">
-                            ${filterOptions.types.map(type => `<option value="${type.value}">${type.label}</option>`).join('')}
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <div class="col-12 d-flex justify-content-between align-items-end">
-                    <!-- More Filter -->
-                    <div class="more-filter">
-                      <a href="#" id="moreFilter">+ More filters</a>
-                    </div>
                     <!-- Submit -->
                     <div class="form-group mb-0">
                       <button type="submit" class="btn south-btn">Search</button>
@@ -180,17 +164,6 @@ export async function injectAdvancedSearch() {
       });
     }
 
-    // Toggle more filters
-    const moreFilterLink = document.getElementById('moreFilter');
-    const secondSteps = document.querySelector('.search-form-second-steps');
-    if (moreFilterLink && secondSteps) {
-      moreFilterLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        secondSteps.classList.toggle('d-none');
-        moreFilterLink.textContent = secondSteps.classList.contains('d-none') ? '+ More filters' : '- Less filters';
-      });
-    }
-
     // Handle search form submission
     const searchForm = document.getElementById('advanceSearch');
     const propertyList = document.getElementById('property-list');
@@ -207,7 +180,6 @@ export async function injectAdvancedSearch() {
           const offer = document.getElementById('offers')?.value || 'All Offers';
           const bedrooms = document.getElementById('bedrooms')?.value || 'Bedrooms';
           const bathrooms = document.getElementById('bathrooms')?.value || 'Bathrooms';
-          const type = document.getElementById('types')?.value || 'All Types';
           const spaceRange = document.querySelector('.slider-range-price[data-unit=" sq. ft"]');
           const priceRange = document.querySelector('.slider-range-price[data-unit=" mil"]');
 
@@ -230,35 +202,37 @@ export async function injectAdvancedSearch() {
             const offerValue = parseInt(offer); // Remove % for query
             q = query(q, where('offer', '==', offerValue));
           }
-          if (type !== 'All Types') {
-            q = query(q, where('type', '==', type));
-          }
+          // Only include space range in Firestore query
+          q = query(q, where('space', '>=', minSpace), where('space', '<=', maxSpace));
+
+          const snapshot = await getDocs(q);
+          let properties = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+          // Apply client-side filtering for bedrooms, bathrooms, price, and keyword
+          let filteredProperties = properties;
           if (bedrooms !== 'Bedrooms') {
             const bedValue = bedrooms === '5+' ? 5 : parseInt(bedrooms);
-            q = query(q, where('bedrooms', '>=', bedValue));
+            filteredProperties = filteredProperties.filter(property => property.bedrooms >= bedValue);
           }
           if (bathrooms !== 'Bathrooms') {
             const bathValue = bathrooms === '5+' ? 5 : parseInt(bathrooms);
-            q = query(q, where('bathrooms', '>=', bathValue));
+            filteredProperties = filteredProperties.filter(property => property.bathrooms >= bathValue);
           }
-          q = query(q, where('space', '>=', minSpace), where('space', '<=', maxSpace));
-          q = query(q, where('price', '>=', minPrice), where('price', '<=', maxPrice));
-
-          const snapshot = await getDocs(q);
-          const properties = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-          let html = '';
-          let filteredProperties = properties;
-
-          // Apply keyword filtering client-side
+          if (minPrice !== 10000000 || maxPrice !== 1300000000) {
+            filteredProperties = filteredProperties.filter(
+              property => property.price >= minPrice && property.price <= maxPrice
+            );
+          }
           if (keyword) {
-            filteredProperties = properties.filter(property =>
-              (property.title?.toLowerCase().includes(keyword) || false) ||
-              (property.description?.toLowerCase().includes(keyword) || false) ||
-              (property.city?.toLowerCase().includes(keyword) || false)
+            filteredProperties = filteredProperties.filter(
+              property =>
+                (property.title?.toLowerCase().includes(keyword) || false) ||
+                (property.description?.toLowerCase().includes(keyword) || false) ||
+                (property.city?.toLowerCase().includes(keyword) || false)
             );
           }
 
+          let html = '';
           if (filteredProperties.length === 0) {
             html = '<p class="text-center">No properties found matching your criteria.</p>';
           } else {

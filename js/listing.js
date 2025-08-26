@@ -1,3 +1,4 @@
+// js/index.js
 import { getAllDocs } from '../utils/queries/index.js';
 import { showLoader, removeLoader } from '../utils/loader/index.js';
 import { savePropertyDetails } from '../utils/storage/index.js';
@@ -9,14 +10,21 @@ export async function loadProperties() {
     console.error('Property list container not found (#property-list)');
     return;
   }
+
   try {
     showLoader();
     const properties = await getAllDocs('properties');
     let html = '';
+
     if (properties.length === 0) {
       html = '<p class="text-center">No properties available at this time.</p>';
     } else {
-      properties.forEach((property, index) => {
+      // Check if on index.html
+      const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname === '/' || window.location.pathname === '';
+      const displayLimit = isIndexPage ? 9 : properties.length; // Limit to 9 on index.html, else show all
+      const propertiesToShow = properties.slice(0, displayLimit); // Get up to 9 properties
+
+      propertiesToShow.forEach((property, index) => {
         html += `
           <div class="col-12 col-md-6 col-xl-4">
             <div class="single-featured-property mb-50 wow fadeInUp" data-wow-delay="${100 * (index + 1)}ms">
@@ -59,7 +67,17 @@ export async function loadProperties() {
           </div>
         `;
       });
+
+      // Add "View More" button if on index.html and there are more than 9 properties
+      if (isIndexPage && properties.length > 9) {
+        html += `
+          <div class="col-12 text-center mt-4">
+            <a href="listings.html" class="btn south-btn">View More</a>
+          </div>
+        `;
+      }
     }
+
     propertyList.innerHTML = html;
 
     // Add click event listeners for property links

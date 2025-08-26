@@ -2404,7 +2404,7 @@ footer * {
   color: #333;
   cursor: pointer;
   padding: 10px;
-  display: block;
+  display: none;
   margin-left: auto;
 }
 
@@ -2455,7 +2455,7 @@ footer * {
 }
 
 /* Responsive design */
-@media (max-width: 767px) {
+@media (max-width: 1000px) {
   .mobile-nav-toggle {
     display: block !important; /* Show new toggle on mobile */
   }
@@ -2479,12 +2479,6 @@ footer * {
 }
 
 @media (min-width: 768px) {
-  .mobile-nav {
-    display: none !important; /* Hide mobile nav on desktop */
-  }
-  .mobile-nav-toggle {
-    display: none !important; /* Hide toggle on desktop */
-  }
   .classynav {
     display: flex !important; /* Show desktop nav */
   }
