@@ -1,4 +1,3 @@
-// functions/queries/index.js
 import { db, doc, setDoc, getDoc, collection, getDocs, deleteDoc, query, limit, startAfter } from '../../configs/firebase.js';
 import { showLoader, removeLoader } from '../loader/index.js';
 
@@ -18,6 +17,49 @@ export const getAllDocs = async (collectionName) => {
     return result;
   } catch (error) {
     handleError(`getAllDocs from ${collectionName}`, error);
+  } finally {
+    removeLoader();
+  }
+};
+
+// Get unique filter options for search form with counts for types
+export const getFilterOptions = async () => {
+  showLoader();
+  try {
+    const properties = await getAllDocs('properties');
+    const cities = new Set();
+    const categories = new Set();
+    const listings = new Set();
+    const types = new Map(); // Use Map for counts
+    const offers = new Set();
+
+    properties.forEach(property => {
+      if (property.city) cities.add(property.city);
+      if (property.type) categories.add(property.type); // Assume type field exists
+      if (property.tag) listings.add(property.tag);
+      if (property.type) types.set(property.type, (types.get(property.type) || 0) + 1);
+      if (property.offer != null) offers.add(`${property.offer}%`); // Format as percentage
+    });
+
+    return {
+      cities: ['All Cities', ...Array.from(cities).sort()],
+      categories: ['All Categories', ...Array.from(categories).sort()],
+      listings: ['All Listings', ...Array.from(listings).sort()],
+      types: [
+        { value: 'All Types', label: 'All Types' },
+        ...Array.from(types).map(([value, count]) => ({ value, label: `${value} (${count})` }))
+      ],
+      offers: ['All Offers', ...Array.from(offers).sort((a, b) => parseInt(a) - parseInt(b))]
+    };
+  } catch (error) {
+    handleError('getFilterOptions from properties', error);
+    return {
+      cities: ['All Cities'],
+      categories: ['All Categories'],
+      listings: ['All Listings'],
+      types: [{ value: 'All Types', label: 'All Types' }],
+      offers: ['All Offers']
+    }; // Fallback options
   } finally {
     removeLoader();
   }

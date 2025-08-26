@@ -1,5 +1,5 @@
 // index.js
-import { loadProperties, handleSearch } from './js/listing.js';
+import { loadProperties} from './js/listing.js';
 import { injectAdvancedSearch } from './js/advanced-search.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -265,7 +265,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize listings (unchanged)
     try {
         loadProperties();
-        handleSearch();
     } catch (error) {
         console.error('Error initializing listings:', error);
     }
