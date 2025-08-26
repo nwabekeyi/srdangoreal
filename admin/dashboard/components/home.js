@@ -1,4 +1,3 @@
-// functions/home.js
 import { getAllDocs } from '../../../utils/queries/index.js';
 
 let categoryChartInstance;
@@ -32,7 +31,7 @@ export async function loadAnalytics() {
     if (categoryChartInstance) categoryChartInstance.destroy();
     if (performanceChartInstance) performanceChartInstance.destroy();
 
-    // Create charts
+    // Create charts (requires Chart.js from index.html)
     categoryChartInstance = new Chart(document.getElementById('category-chart'), {
       type: 'pie',
       data: {
@@ -75,17 +74,42 @@ export const sidebarNav = () => {
   const navLinks = document.querySelectorAll('.sidebar .nav-link');
   const sections = document.querySelectorAll('.content-section');
 
+  // Function to set active section
+  const setActiveSection = (sectionId) => {
+    // Hide all sections
+    sections.forEach(section => {
+      section.style.display = 'none';
+    });
+
+    // Show the selected section
+    const activeSection = document.getElementById(sectionId);
+    if (activeSection) {
+      activeSection.style.display = 'block';
+    }
+
+    // Update active class on nav links
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+    });
+    const activeLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+    if (activeLink) {
+      activeLink.classList.add('active');
+    }
+  };
+
+  // Set "Home" as the default section on page load
+  setActiveSection('home');
+
+  // Add click event listeners for navigation
   navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const sectionId = link.getAttribute('data-section');
-      sections.forEach(section => section.style.display = 'none');
-      document.getElementById(sectionId).style.display = 'block';
-      navLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
+      setActiveSection(sectionId);
+      // Collapse sidebar on mobile
       if (window.innerWidth <= 767.98) {
         document.getElementById('sidebar').classList.remove('show');
       }
     });
   });
-}
+};

@@ -576,6 +576,7 @@ img {
   font-weight: var(--font-weight-semibold); /* 600 */
 }
 .main-header-area .nav-brand {
+  width: 100px;
   line-height: 1;
 }
 .main-header-area .classynav ul {
@@ -851,15 +852,25 @@ img {
 
 /* :: 11.0 Single Property Area CSS */
 .single-featured-property {
+    border: 1px solid var(--border-gray); /* #e1dddd */
   position: relative;
   z-index: 1;
   -webkit-transition-duration: var(--transition-duration); /* 500ms */
   transition-duration: var(--transition-duration); /* 500ms */
   overflow: hidden;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .single-featured-property .property-thumb {
   position: relative;
   z-index: 1;
+  height: 300px;
+}
+
+.property-link img, .property-link {
+  height: 300px;
 }
 .single-featured-property .property-thumb .tag span {
   height: 35px; /* No direct variable match, retained */
@@ -894,9 +905,14 @@ img {
   -webkit-transition-duration: var(--transition-duration); /* 500ms */
   transition-duration: var(--transition-duration); /* 500ms */
 }
+
+.property-thumb h5{
+  padding-left: var(--spacing-small);
+  padding-top: 5px;
+}
 .single-featured-property .property-content {
   padding: var(--spacing-small); /* 30px */
-  border: 1px solid var(--border-gray); /* #e1dddd */
+
 }
 .single-featured-property .property-content h5 {
   font-size: 18px; /* No direct variable match, retained */
@@ -925,6 +941,7 @@ img {
   margin-right: 10px; /* No direct variable match, retained */
   display: inline-block !important;
   width: auto !important;
+
 }
 .single-featured-property:hover, .single-featured-property:focus {
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.1); /* No direct variable match, retained */
@@ -1896,5 +1913,722 @@ footer * {
   color: var(--text-gray); /* #7d7d7d */
 }
 
+
+/* style.css (only the updated navbar section) */
+
+/* Ensure the menu is hidden by default on mobile */
+.classy-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 280px; /* Increased for better usability */
+  background: #fff;
+  z-index: 10000; /* Match header-area z-index to avoid overlap */
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.3); /* Stronger shadow for prominence */
+  overflow-y: auto;
+}
+
+/* Show menu when active */
+.classy-menu.active {
+  display: block;
+}
+
+/* Animation keyframes */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Navbar toggler styling */
+.classy-navbar-toggler {
+  cursor: pointer;
+  display: none; /* Hidden on desktop */
+  z-index: 11000; /* Ensure it's above other elements */
+  padding: 10px; /* Add padding for larger click area */
+}
+
+/* Style the toggler icon (hamburger) */
+.navbarToggler {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 32px; /* Increased size for visibility */
+  height: 24px;
+}
+
+.navbarToggler span {
+  display: block;
+  width: 32px; /* Larger bars */
+  height: 4px; /* Thicker bars */
+  background: #fff; /* White for contrast against dark header */
+  margin: 3px 0; /* Adjusted spacing */
+  transition: all 0.3s ease;
+}
+
+/* Transform toggler into X when active */
+.classy-navbar-toggler.active .navbarToggler span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px); /* Adjusted for larger size */
+}
+
+.classy-navbar-toggler.active .navbarToggler span:nth-child(2) {
+  opacity: 0;
+}
+
+.classy-navbar-toggler.active .navbarToggler span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px); /* Adjusted for larger size */
+}
+
+/* Close icon styling */
+.classycloseIcon {
+  cursor: pointer;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cross-wrap {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.cross-wrap span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #333;
+  position: absolute;
+}
+
+.cross-wrap .top {
+  transform: rotate(45deg);
+}
+
+.cross-wrap .bottom {
+  transform: rotate(-45deg);
+}
+
+/* Menu item styling */
+.classynav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.classynav ul li {
+  padding: 12px 20px; /* Slightly larger padding */
+}
+
+.classynav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.classynav ul li a:hover {
+  color: var(--primary-color); /* #18669F */
+}
+
+/* Search form styling */
+.south-search-form {
+  padding: 15px;
+}
+
+.south-search-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.south-search-form button {
+  background: var(--primary-color); /* #18669F */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 767px) {
+  .classy-navbar-toggler {
+    display: block !important; /* Force display on mobile */
+  }
+  .classy-menu {
+    display: none;
+  }
+  .classy-menu.active {
+    display: block;
+  }
+  .classynav ul {
+    flex-direction: column; /* Stack menu items vertically */
+  }
+  .main-header-area .classy-navbar {
+    padding: 0.5em 20px; /* Reduce padding for mobile */
+  }
+}
+
+/* Desktop: Show menu, hide toggler */
+@media (min-width: 768px) {
+  .classy-menu {
+    display: block !important; /* Always show menu on desktop */
+    position: static;
+    width: auto;
+    height: auto;
+    box-shadow: none;
+    background: transparent;
+  }
+  .classynav ul {
+    display: flex;
+    align-items: center;
+  }
+  .classycloseIcon {
+    display: none; /* Hide close icon on desktop */
+  }
+  .classy-navbar-toggler {
+    display: none !important; /* Hide toggler on desktop */
+  }
+}
+
+/* style.css (only the updated navbar section) */
+
+/* Ensure the menu is hidden by default on mobile */
+.classy-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 280px; /* Increased for better usability */
+  background: #fff;
+  z-index: 10000; /* Match header-area z-index to avoid overlap */
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.3); /* Stronger shadow for prominence */
+  overflow-y: auto;
+}
+
+/* Show menu when active */
+.classy-menu.active {
+  display: block;
+}
+
+/* Animation keyframes */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Navbar toggler styling */
+.classy-navbar-toggler {
+  cursor: pointer;
+  display: none; /* Hidden on desktop */
+  z-index: 11000; /* Ensure it's above other elements */
+  padding: 10px; /* Add padding for larger click area */
+}
+
+/* Style the toggler icon (hamburger) */
+.navbarToggler {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 32px; /* Increased size for visibility */
+  height: 24px;
+}
+
+.navbarToggler span {
+  display: block;
+  width: 32px; /* Larger bars */
+  height: 4px; /* Thicker bars */
+  background: #fff; /* White for contrast against dark header */
+  margin: 3px 0; /* Adjusted spacing */
+  transition: all 0.3s ease;
+}
+
+/* Transform toggler into X when active */
+.classy-navbar-toggler.active .navbarToggler span:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px); /* Adjusted for larger size */
+}
+
+.classy-navbar-toggler.active .navbarToggler span:nth-child(2) {
+  opacity: 0;
+}
+
+.classy-navbar-toggler.active .navbarToggler span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px); /* Adjusted for larger size */
+}
+
+/* Close icon styling */
+.classycloseIcon {
+  cursor: pointer;
+  padding: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cross-wrap {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.cross-wrap span {
+  display: block;
+  width: 24px;
+  height: 3px;
+  background: #333;
+  position: absolute;
+}
+
+.cross-wrap .top {
+  transform: rotate(45deg);
+}
+
+.cross-wrap .bottom {
+  transform: rotate(-45deg);
+}
+
+/* Menu item styling */
+.classynav{
+  display: flex !important;
+}
+
+.classynav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.classynav ul li {
+  padding: 12px 20px; /* Slightly larger padding */
+}
+
+.classynav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.classynav ul li a:hover {
+  color: var(--primary-color); /* #18669F */
+}
+
+/* Search form styling */
+.south-search-form {
+  padding: 15px;
+}
+
+.south-search-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.south-search-form button {
+  background: var(--primary-color); /* #18669F */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Responsive design for mobile */
+@media (max-width: 767px) {
+  .classy-navbar-toggler {
+    display: block !important; /* Force display on mobile */
+  }
+  .classy-menu {
+    display: none;
+  }
+  .classy-menu.active {
+    display: block;
+  }
+  .classynav ul {
+    flex-direction: column; /* Stack menu items vertically */
+  }
+  .main-header-area .classy-navbar {
+    padding: 0.5em 20px; /* Reduce padding for mobile */
+  }
+}
+
+/* Desktop: Show menu, hide toggler */
+@media (min-width: 768px) {
+  .classy-menu {
+    display: block !important; /* Always show menu on desktop */
+    position: static;
+    width: auto;
+    height: auto;
+    box-shadow: none;
+    background: transparent;
+  }
+  .classynav ul {
+    display: flex;
+    align-items: center;
+  }
+  .classycloseIcon {
+    display: none; /* Hide close icon on desktop */
+  }
+  .classy-navbar-toggler {
+    display: none !important; /* Hide toggler on desktop */
+  }
+}
+
+/* style.css (add this after all @import statements) */
+
+/* New Mobile Navigation */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 280px;
+  background: #fff;
+  z-index: 10000; /* Match header-area z-index */
+  box-shadow: -4px 0 8px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  padding: 20px;
+  transform: translateX(100%); /* Start off-screen */
+}
+
+.mobile-nav.active {
+  display: block;
+  transform: translateX(0); /* Slide in when active */
+}
+
+/* Animation keyframes */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+/* Mobile nav toggle */
+.mobile-nav-toggle {
+  cursor: pointer;
+  display: none; /* Hidden on desktop */
+  z-index: 11000; /* Above other elements */
+  background: none;
+  border: none;
+  padding: 10px;
+}
+
+.mobile-nav-toggle span {
+  display: block;
+  width: 32px;
+  height: 4px;
+  background: #fff; /* White for contrast against header */
+  margin: 3px 0;
+  transition: all 0.3s ease;
+}
+
+/* Transform toggle into X when active */
+.mobile-nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(2px, 3px);
+  background-color: var(--primary-color);
+
+}
+
+.mobile-nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+  background-color: var(--primary-color);
+
+}
+
+/* Close button */
+.mobile-nav-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+  padding: 10px;
+  display: block;
+  margin-left: auto;
+}
+
+/* Menu items */
+.mobile-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.mobile-nav ul li {
+  padding: 12px 0;
+}
+
+.mobile-nav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.mobile-nav ul li a:hover {
+  color: var(--primary-color); /* #18669F */
+}
+
+/* Search form */
+.mobile-nav .south-search-form {
+  padding: 15px 0;
+}
+
+.mobile-nav .south-search-form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.mobile-nav .south-search-form button {
+  background: var(--primary-color); /* #18669F */
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Responsive design */
+@media (max-width: 767px) {
+  .mobile-nav-toggle {
+    display: block !important; /* Show new toggle on mobile */
+  }
+  .mobile-nav {
+    display: none; /* Hidden by default */
+  }
+  .mobile-nav.active {
+    display: block; /* Show when active */
+  }
+  /* Hide existing desktop nav on mobile */
+  .classynav {
+    display: none !important;
+  }
+  /* Optionally hide existing toggler to avoid confusion */
+  .classy-navbar-toggler {
+    display: none !important;
+  }
+  .classy-menu {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-nav {
+    display: none !important; /* Hide mobile nav on desktop */
+  }
+  .mobile-nav-toggle {
+    display: none !important; /* Hide toggle on desktop */
+  }
+  .classynav {
+    display: flex !important; /* Show desktop nav */
+  }
+};
+
+.mobile-nav-close{
+  display:none;
+}
+
+/* Main Slider Styles */
+.main-slider {
+  width: 100%;
+  height: auto; /* Allow height to adapt to content */
+  margin-bottom: 20px;
+}
+
+.main-slider .slick-track,
+.main-slider .slick-slide,
+.main-slider .slick-cloned {
+  height: auto; /* Override Slick's height constraints */
+}
+
+.main-slider .single-hero-slide {
+  width: 100%;
+  height: 600px; /* Fixed height for taller images */
+  position: relative;
+  overflow: hidden;
+}
+
+.main-slider .container {
+  height: 100%; /* Ensure Bootstrap container is full height */
+  padding: 0; /* Remove padding */
+}
+
+.main-slider .row {
+  height: 100%; /* Ensure Bootstrap row is full height */
+  margin: 0; /* Remove margins */
+}
+
+.main-slider .col-12 {
+  height: 100%; /* Ensure Bootstrap column is full height */
+  padding: 0; /* Remove padding */
+}
+
+.main-slider .slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fill container, may crop edges */
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+.main-slider .hero-slides-content {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #fff;
+  z-index: 1;
+}
+
+.main-slider .slick-prev,
+.main-slider .slick-next {
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  z-index: 2;
+  transition: background 0.3s ease;
+}
+
+.main-slider .slick-prev:hover,
+.main-slider .slick-next:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.main-slider .slick-prev i,
+.main-slider .slick-next i {
+  font-size: 20px;
+  color: #fff;
+}
+
+.main-slider .slick-dots {
+  bottom: 15px;
+  z-index: 2;
+}
+
+.main-slider .slick-dots li button:before {
+  font-size: 12px;
+  color: #fff;
+  opacity: 0.7;
+}
+
+.main-slider .slick-dots li.slick-active button:before {
+  color: #007bff; /* Primary color for active dot */
+  opacity: 1;
+}
+
+/* Thumbnail Container Styles (Static) */
+.thumbnail-container {
+  width: 100%; /* Full width to align left */
+  text-align: left; /* Align thumbnails to the left */
+  padding: 10px 0;
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping if many thumbnails */
+  gap: 10px; /* Space between thumbnails */
+}
+
+.thumbnail-container .thumbnail-slide {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.thumbnail-container .thumbnail-image {
+  width: 100px;
+  height: 60px;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: border 0.3s ease;
+}
+
+.thumbnail-container .thumbnail-slide.active .thumbnail-image {
+  border: 2px solid #007bff; /* Highlight active thumbnail */
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .main-slider .single-hero-slide {
+    height: 450px; /* Taller height for tablets */
+  }
+  .thumbnail-container {
+    padding-left: 15px; /* Align with container padding */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-slider .single-hero-slide {
+    height: 350px; /* Taller height for mobile */
+  }
+  .thumbnail-container .thumbnail-image {
+    width: 80px;
+    height: 50px;
+  }
+}
 /* Import Responsive CSS */
 @import url(css/responsive.css);

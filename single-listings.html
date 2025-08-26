@@ -25,6 +25,9 @@
 
     <!-- Style CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- Slick Carousel CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
 </head>
 
 <body>
@@ -35,7 +38,7 @@
 
     <!-- ##### Header Area Start ##### -->
     <header class="header-area">
-
+        <!-- Header content remains unchanged -->
     </header>
     <!-- ##### Header Area End ##### -->
 
@@ -58,9 +61,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <!-- Single Listings Slides -->
-                    <div class="hero-slides owl-carousel">
+                    <!-- Main Slider -->
+                    <div class="hero-slides main-slider">
                         <!-- Slides will be dynamically loaded here -->
+                    </div>
+                    <!-- Thumbnail Container (Static) -->
+                    <div class="thumbnail-container">
+                        <!-- Thumbnails will be dynamically loaded here -->
                     </div>
                 </div>
             </div>
@@ -133,6 +140,8 @@
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAwuyLRa1uKNtbgx6xAJVmWy-zADgegA2s"></script>
     <script src="js/map-active.js"></script>
+    <!-- Slick Carousel JS -->
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- Application Scripts -->
     <script src="index.js" type="module"></script>
     <script src="js/single-listing.js" type="module"></script>

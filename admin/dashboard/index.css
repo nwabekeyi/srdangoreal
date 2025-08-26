@@ -463,3 +463,9 @@ canvas {
 .alert {
     margin-top: 1rem;
 }
+
+/* Force black background + white text for all dropdown options */
+.form-group select option {
+    background-color: #000000;
+    color: #ffffff;
+}

@@ -1,9 +1,16 @@
 // index.js
 import { loadProperties, handleSearch } from './js/listing.js';
+import { injectAdvancedSearch } from './js/advanced-search.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.querySelector('header');
     const footer = document.querySelector('footer');
+
+    // Check if header and footer elements exist
+    if (!header || !footer) {
+        console.error('Header or footer element not found in the DOM');
+        return;
+    }
 
     header.innerHTML = `
         <!-- Top Header Area -->
@@ -29,12 +36,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <!-- Classy Menu -->
                 <nav class="classy-navbar justify-content-between" id="southNav">
                     <!-- Logo -->
-                    <a class="nav-brand" style="width:8%" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                    <!-- Navbar Toggler -->
+                    <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
+                    <!-- Navbar Toggler (Existing) -->
                     <div class="classy-navbar-toggler">
                         <span class="navbarToggler"><span></span><span></span><span></span></span>
                     </div>
-                    <!-- Menu -->
+                    <!-- Menu (Existing) -->
                     <div class="classy-menu">
                         <!-- close btn -->
                         <div class="classycloseIcon">
@@ -61,6 +68,29 @@ document.addEventListener('DOMContentLoaded', () => {
                         </div>
                         <!-- Nav End -->
                     </div>
+                    <!-- New Mobile Nav Toggle -->
+                    <button class="mobile-nav-toggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <!-- New Mobile Navigation -->
+                    <nav class="mobile-nav">
+                        <button class="mobile-nav-close">&times;</button>
+                        <ul>
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about-us.html">About Us</a></li>
+                            <li><a href="listings.html">Properties</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                        <div class="south-search-form">
+                            <form action="#" method="post">
+                                <input type="search" name="mobile-search" id="mobile-search" placeholder="Search Anything ...">
+                                <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
+                    </nav>
                 </nav>
             </div>
         </div>
@@ -103,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="address">
                                 <h6><img src="img/icons/phone-call.png" alt=""> +234 813 503 2249</h6>
                                 <h6><img src="img/icons/envelope.png" alt=""> office@srdango.com</h6>
-                                <h6><img src="img/icons/location.png" alt=""> Abuja Office: Anthony Enahoro street, Utako, Abuja, FCT/h6>
+                                <h6><img src="img/icons/location.png" alt=""> Abuja Office: Anthony Enahoro street, Utako, Abuja, FCT</h6>
                                 <h6><img src="img/icons/location.png" alt=""> Lagos Office: 4, Oluwole Agbede, off Idowu Dabiri, Sangotedo, Lagos</h6>
                                 <h6><img src="img/icons/location.png" alt=""> Ibadan Office: suit 1 & 2, Ni'motallahi Awujoola central mosque complex, Ologeru, Ibadan</h6>
                             </div>
@@ -164,7 +194,79 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
     `;
 
-    // Initialize listings
-    loadProperties();
-    handleSearch();
+    // Inject advanced search
+    injectAdvancedSearch();
+
+    // New mobile nav toggle functionality
+    const navToggle = document.querySelector('.mobile-nav-toggle');
+    const mobileNav = document.querySelector('.mobile-nav');
+    const navClose = document.querySelector('.mobile-nav-close');
+
+    // Debug: Check if new mobile nav elements are found
+    if (!navToggle) {
+        console.error('Mobile nav toggle (.mobile-nav-toggle) not found in the DOM');
+    }
+    if (!mobileNav) {
+        console.error('Mobile nav (.mobile-nav) not found in the DOM');
+    }
+    if (!navClose) {
+        console.error('Mobile nav close (.mobile-nav-close) not found in the DOM');
+    }
+
+    // Toggle menu function for new mobile nav
+    if (navToggle && mobileNav && navClose) {
+        const toggleMenu = () => {
+            console.log('Toggling mobile nav...');
+            mobileNav.classList.toggle('active');
+            navToggle.classList.toggle('active');
+            if (mobileNav.classList.contains('active')) {
+                mobileNav.style.animation = 'slideIn 0.3s ease-in-out forwards';
+                console.log('Mobile nav opened');
+            } else {
+                mobileNav.style.animation = 'slideOut 0.3s ease-in-out forwards';
+                setTimeout(() => {
+                    mobileNav.style.animation = ''; // Clear animation after closing
+                }, 300);
+                console.log('Mobile nav closed');
+            }
+        };
+
+        // Click event for nav toggle
+        navToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('Mobile nav toggle clicked');
+            toggleMenu();
+        });
+
+        // Click event for close button
+        navClose.addEventListener('click', (e) => {
+            e.stopPropagation();
+            console.log('Mobile nav close clicked');
+            toggleMenu();
+        });
+
+        // Click outside to close menu
+        document.addEventListener('click', (e) => {
+            if (!mobileNav.contains(e.target) && !navToggle.contains(e.target) && mobileNav.classList.contains('active')) {
+                console.log('Clicked outside mobile nav');
+                toggleMenu();
+            }
+        });
+
+        // Close menu on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNav.classList.contains('active')) {
+                console.log('Escape key pressed');
+                toggleMenu();
+            }
+        });
+    }
+
+    // Initialize listings (unchanged)
+    try {
+        loadProperties();
+        handleSearch();
+    } catch (error) {
+        console.error('Error initializing listings:', error);
+    }
 });

@@ -8,9 +8,9 @@ import {
 import {
   loadProperties,
   listenToPropertyForm
-} from './functions/properties.js';
-import { sidebarNav, loadAnalytics } from './functions/home.js';
-import { submitBlog, loadBlogs } from './functions/blog.js';document.addEventListener('DOMContentLoaded', () => {
+} from './components/properties.js';
+import { sidebarNav, loadAnalytics } from './components/home.js';
+import { submitBlog, loadBlogs } from './components/blog.js';document.addEventListener('DOMContentLoaded', () => {
   const errorDiv = document.getElementById('error');
   const logoutBtn = document.querySelector('.btn-logout');  //sidebar navidation
   sidebarNav();  // Check if user is admin
