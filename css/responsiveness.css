@@ -342,3 +342,87 @@
     padding: 0 var(--spacing-xsmall); /* 10px */
   }
 }
+
+
+/* Responsive design */
+@media (max-width: 1000px) {
+  .mobile-nav-toggle {
+    display: block !important; /* Show new toggle on mobile */
+  }
+  .mobile-nav {
+    display: none; /* Hidden by default */
+  }
+  .mobile-nav.active {
+    display: block; /* Show when active */
+  }
+  /* Hide existing desktop nav on mobile */
+  .classynav {
+    display: none !important;
+  }
+  /* Optionally hide existing toggler to avoid confusion */
+  .classy-navbar-toggler {
+    display: none !important;
+  }
+  .classy-menu {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .classy-menu {
+    display: block !important; /* Always show menu on desktop */
+    position: static;
+    width: auto;
+    height: auto;
+    box-shadow: none;
+    background: transparent;
+  }
+  .classynav ul {
+    display: flex;
+    align-items: center;
+  }
+  .classycloseIcon {
+    display: none; /* Hide close icon on desktop */
+  }
+  .classy-navbar-toggler {
+    display: none !important; /* Hide toggler on desktop */
+  }
+  .classynav {
+    display: flex !important; /* Show desktop nav */
+  }
+};
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .main-slider .single-hero-slide {
+    height: 450px; /* Taller height for tablets */
+  }
+  .thumbnail-container {
+    padding-left: 15px; /* Align with container padding */
+  }
+  .classy-navbar-toggler {
+    display: block !important; /* Force display on mobile */
+  }
+  .classy-menu {
+    display: none;
+  }
+  .classy-menu.active {
+    display: block;
+  }
+  .classynav ul {
+    flex-direction: column; /* Stack menu items vertically */
+  }
+  .main-header-area .classy-navbar {
+    padding: 0.5em 20px; /* Reduce padding for mobile */
+  }
+}
+
+@media (max-width: 480px) {
+  .main-slider .single-hero-slide {
+    height: 350px; /* Taller height for mobile */
+  }
+  .thumbnail-container .thumbnail-image {
+    width: 80px;
+    height: 50px;
+  }
+}
