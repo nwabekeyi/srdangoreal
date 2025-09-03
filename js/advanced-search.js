@@ -41,7 +41,7 @@ export async function injectAdvancedSearch() {
       <div class="container">
         <div class="row">
           <div class="col-12">
-            <div class="advanced-search-form">
+            <div id="search-form" class="advanced-search-form">
               <!-- Search Title -->
               <div class="search-title">
                 <p>Search for your home</p>
