@@ -37,10 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <nav class="classy-navbar justify-content-between" id="southNav">
                     <!-- Logo -->
                     <a class="nav-brand" href="index.html"><img src="img/core-img/logo.png" alt=""></a>
-                    <!-- Navbar Toggler (Existing) -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
                     <!-- Menu (Existing) -->
                     <div class="classy-menu">
                         <!-- close btn -->
@@ -105,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
-                            <h6>About Us</h6>
+                            <h2>About Us</h2>
                         </div>
                         <img src="img/bg-img/footer.jpg" alt="">
                         <div class="footer-logo my-4">
@@ -119,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="footer-widget-area mb-100">
                         <!-- Widget Title -->
                         <div class="widget-title">
-                            <h6>Hours</h6>
+                            <h2>Hours</h2>
                         </div>
                         <!-- Office Hours -->
                         <div class="weekly-office-hours">
@@ -160,29 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <!-- Single Footer Widget -->
-                <div class="col-12 col-sm-6 col-xl-3">
-                    <div class="footer-widget-area mb-100">
-                        <!-- Widget Title -->
-                        <div class="widget-title">
-                            <h6>Featured Properties</h6>
-                        </div>
-                        <!-- Featured Properties Slides -->
-                        <div class="featured-properties-slides owl-carousel">
-                            <!-- Single Slide -->
-                            <div class="single-featured-properties-slide">
-                                <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
-                            </div>
-                            <!-- Single Slide -->
-                            <div class="single-featured-properties-slide">
-                                <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
-                            </div>
-                            <!-- Single Slide -->
-                            <div class="single-featured-properties-slide">
-                                <a href="#"><img src="img/bg-img/fea-product.jpg" alt=""></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -264,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
         loadProperties();
         // Load featured properties only on blog.html and about-us.html
-    if (window.location.pathname.includes('blog.html') || window.location.pathname.includes('about-us.html')) {
+    if (window.location.pathname.includes('blog.html')) {
         loadFeaturedProperties();
       }
     } catch (error) {

@@ -1,54 +1,31 @@
-// js/contact.js
-import { setupFormspree } from './formspree.js';
+import { setupFormspree } from './formSpree.js';
 import { FORMSPREE_ENDPOINTS } from '../secrets.js';
+import { showLoader, removeLoader } from '../utils/loader/index.js'; // Import loader functions
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Example of dynamic additional data
+    // Dynamic additional data for tracking
     const currentPage = window.location.href;
     const submissionTime = new Date().toLocaleString('en-NG', { timeZone: 'Africa/Lagos' }); // WAT timezone
 
     const forms = [
         {
             formId: 'contact-form',
-            formspreeEndpoint: FORMSPREE_ENDPOINTS.contactForm, // Use endpoint from secrets.js
+            formspreeEndpoint: FORMSPREE_ENDPOINTS.contact_form, // Use contact form endpoint: https://formspree.io/f/xdklajpw
             successMessage: 'Thank you for contacting us! We will respond soon.',
             errorMessage: 'Failed to send your message. Please try again.',
             additionalData: {
                 page: currentPage,
                 submitted_at: submissionTime,
                 form_type: 'Contact Form'
-            }
-        },
-        {
-            formId: 'newsletter-form',
-            formspreeEndpoint: FORMSPREE_ENDPOINTS.newsletterForm, // Use endpoint from secrets.js
-            successMessage: 'You have successfully subscribed to our newsletter!',
-            errorMessage: 'Error subscribing. Please try again.',
-            additionalData: {
-                page: currentPage,
-                submitted_at: submissionTime,
-                form_type: 'Newsletter Signup'
-            }
+            },
+            onSubmit: showLoader, // Show loader on form submission
+            onComplete: removeLoader // Remove loader on completion
         }
-        // Add more forms as needed, e.g.:
-        /*
-        {
-            formId: 'feedback-form',
-            formspreeEndpoint: FORMSPREE_ENDPOINTS.feedbackForm,
-            successMessage: 'Thank you for your feedback!',
-            errorMessage: 'Error submitting feedback. Please try again.',
-            additionalData: {
-                page: currentPage,
-                submitted_at: submissionTime,
-                form_type: 'Feedback Form',
-                browser: navigator.userAgent
-            }
-        }
-        */
     ];
 
     forms.forEach(formConfig => {
         if (formConfig.formspreeEndpoint) {
+            console.log(`Setting up Formspree for form "${formConfig.formId}" with endpoint: ${formConfig.formspreeEndpoint}`);
             setupFormspree(formConfig);
         } else {
             console.error(`No Formspree endpoint found for form "${formConfig.formId}"`);

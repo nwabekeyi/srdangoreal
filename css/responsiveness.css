@@ -1,16 +1,7 @@
 /* responsive.css */
 
 /* Scroll Up Area */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  #scrollUp {
-    bottom: var(--spacing-small); /* 30px */
-    right: var(--spacing-small); /* 30px */
-    height: var(--spacing-medium); /* 50px */
-    width: var(--spacing-medium); /* 50px */
-    line-height: 46px; /* No direct variable match, retained */
-  }
-}
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
   #scrollUp {
     bottom: var(--spacing-small); /* 30px */
     right: var(--spacing-small); /* 30px */
@@ -21,12 +12,7 @@
 }
 
 /* Section Heading Area */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .section-heading h2 {
-    font-size: 24px; /* No direct variable match, retained */
-  }
-}
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1199px) {
   .section-heading h2 {
     font-size: 24px; /* No direct variable match, retained */
   }
@@ -40,6 +26,17 @@
   .top-header-area .email-address {
     padding: var(--spacing-xsmall) var(--spacing-small); /* 15px 30px */
   }
+  .main-header-area {
+    height: 70px; /* No direct variable match, retained */
+  }
+  .main-header-area .classy-navbar {
+    height: 70px; /* No direct variable match, retained */
+    padding: 0.5em var(--spacing-small); /* 30px */
+  }
+  .main-header-area .south-search-form input {
+    width: calc(100% - var(--spacing-small)); /* 30px */
+    margin: 0 var(--spacing-xsmall); /* 15px */
+  }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .main-header-area {
@@ -48,23 +45,12 @@
   .main-header-area .classy-navbar {
     height: 70px; /* No direct variable match, retained */
   }
-  .main-header-area .searchbtn {
-    margin-left: 0;
-    height: var(--spacing-medium); /* 50px */
-    width: 100%;
-    margin-top: var(--spacing-xsmall); /* 15px */
-    line-height: var(--spacing-medium); /* 50px */
-    background-color: var(--primary-color);
+  .main-header-area .south-search-form input {
+    width: calc(100% - var(--spacing-small)); /* 30px */
+    margin: 0 var(--spacing-xsmall); /* 15px */
   }
 }
-@media only screen and (max-width: 767px) {
-  .main-header-area {
-    height: 70px; /* No direct variable match, retained */
-  }
-  .main-header-area .classy-navbar {
-    height: 70px; /* No direct variable match, retained */
-    padding: 0.5em var(--spacing-small); /* 30px */
-  }
+@media only screen and (max-width: 991px) {
   .main-header-area .searchbtn {
     margin-left: 0;
     height: var(--spacing-medium); /* 50px */
@@ -72,6 +58,9 @@
     margin-top: var(--spacing-xsmall); /* 15px */
     line-height: var(--spacing-medium); /* 50px */
     background-color: var(--primary-color);
+  }
+  .is-sticky .main-header-area {
+    height: 70px; /* No direct variable match, retained */
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -86,33 +75,17 @@
     width: 550px; /* No direct variable match, retained */
   }
 }
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .main-header-area .south-search-form input {
-    width: calc(100% - var(--spacing-small)); /* 30px */
-    margin: 0 var(--spacing-xsmall); /* 15px */
-  }
-}
-@media only screen and (max-width: 767px) {
-  .main-header-area .south-search-form input {
-    width: calc(100% - var(--spacing-small)); /* 30px */
-    margin: 0 var(--spacing-xsmall); /* 15px */
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .is-sticky .main-header-area {
-    height: 70px; /* No direct variable match, retained */
-  }
-}
-@media only screen and (max-width: 767px) {
-  .is-sticky .main-header-area {
-    height: 70px; /* No direct variable match, retained */
-  }
-}
 
 /* Welcome Area */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   .single-hero-slide {
-    height: 700px; /* Matches --height-700, but retained for specificity */
+    height: 700px; /* Matches --height-700, retained for specificity */
+  }
+  .hero-area .owl-dots {
+    width: calc(100% - 6%); /* No direct variable match, retained */
+    left: 5%; /* No direct variable match, retained */
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
   }
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -121,6 +94,12 @@
   }
   .hero-slides-content h2 {
     font-size: 40px; /* No direct variable match, retained */
+  }
+  .hero-area .owl-dots {
+    width: calc(100% - 6%); /* No direct variable match, retained */
+    left: 5%; /* No direct variable match, retained */
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
   }
 }
 @media only screen and (max-width: 767px) {
@@ -148,22 +127,6 @@
 @media only screen and (min-width: 480px) and (max-width: 767px) {
   .hero-slides-content h2 {
     font-size: 24px; /* No direct variable match, retained */
-  }
-}
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .hero-area .owl-dots {
-    width: calc(100% - 6%); /* No direct variable match, retained */
-    left: 5%; /* No direct variable match, retained */
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
-  }
-}
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .hero-area .owl-dots {
-    width: calc(100% - 6%); /* No direct variable match, retained */
-    left: 5%; /* No direct variable match, retained */
-    -webkit-transform: translateX(0%);
-    transform: translateX(0%);
   }
 }
 
@@ -204,20 +167,7 @@
 }
 
 /* Editor Area */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .south-editor-area {
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-  }
-  .south-editor-area .editor-content-area,
-  .south-editor-area .editor-thumbnail {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 100%;
-    flex: 0 0 100%;
-    min-width: 100%;
-  }
-}
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
   .south-editor-area {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
@@ -232,26 +182,15 @@
 }
 
 /* Call to Action Area */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (max-width: 991px) {
   .call-to-action-area {
-    height: 500px; /* Matches --height-500, but retained for specificity */
+    height: 500px; /* Matches --height-500, retained for specificity */
   }
   .call-to-action-area .cta-content h2 {
     font-size: 30px; /* No direct variable match, retained */
   }
   .call-to-action-area .cta-content h6 {
     font-size: 18px; /* No direct variable match, retained */
-  }
-}
-@media only screen and (max-width: 767px) {
-  .call-to-action-area {
-    height: 500px; /* Matches --height-500, but retained for specificity */
-  }
-  .call-to-action-area .cta-content h2 {
-    font-size: 24px; /* No direct variable match, retained */
-  }
-  .call-to-action-area .cta-content h6 {
-    font-size: 16px; /* No direct variable match, retained */
   }
 }
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -264,12 +203,7 @@
 }
 
 /* About Us Area */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-  .about-content-wrapper .about-content {
-    margin-bottom: var(--spacing-large); /* 100px */
-  }
-}
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 991px) {
   .about-content-wrapper .about-content {
     margin-bottom: var(--spacing-large); /* 100px */
   }
@@ -295,15 +229,7 @@
 }
 
 /* Contact Realtor Wrapper */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-  .contact-realtor-wrapper .realtor---info {
-    padding: 40px var(--spacing-small); /* 30px */
-  }
-  .contact-realtor-wrapper .realtor--contact-form {
-    padding: 0 var(--spacing-small) 40px; /* 30px */
-  }
-}
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1199px) {
   .contact-realtor-wrapper .realtor---info {
     padding: 40px var(--spacing-small); /* 30px */
   }
@@ -313,7 +239,7 @@
 }
 
 /* Comment/Contact Area */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
+@media only screen and (max-width: 991px) {
   .leave-comment-area .comment-form,
   .leave-comment-area .contact-form,
   .south-contact-area .comment-form,
@@ -322,12 +248,6 @@
   }
 }
 @media only screen and (max-width: 767px) {
-  .leave-comment-area .comment-form,
-  .leave-comment-area .contact-form,
-  .south-contact-area .comment-form,
-  .south-contact-area .contact-form {
-    margin-bottom: var(--spacing-large); /* 100px */
-  }
   .single_comment_area .comment-wrapper .comment-author {
     margin-right: var(--spacing-xsmall); /* 10px */
   }
@@ -343,8 +263,7 @@
   }
 }
 
-
-/* Responsive design */
+/* Responsive Navigation */
 @media (max-width: 1000px) {
   .mobile-nav-toggle {
     display: block !important; /* Show new toggle on mobile */
@@ -356,13 +275,8 @@
     display: block; /* Show when active */
   }
   /* Hide existing desktop nav on mobile */
-  .classynav {
-    display: none !important;
-  }
-  /* Optionally hide existing toggler to avoid confusion */
-  .classy-navbar-toggler {
-    display: none !important;
-  }
+  .classynav,
+  .classy-navbar-toggler,
   .classy-menu {
     display: none !important;
   }
@@ -381,16 +295,14 @@
     display: flex;
     align-items: center;
   }
-  .classycloseIcon {
-    display: none; /* Hide close icon on desktop */
-  }
+  .classycloseIcon,
   .classy-navbar-toggler {
-    display: none !important; /* Hide toggler on desktop */
+    display: none !important; /* Hide close icon and toggler on desktop */
   }
   .classynav {
     display: flex !important; /* Show desktop nav */
   }
-};
+}
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
@@ -414,15 +326,5 @@
   }
   .main-header-area .classy-navbar {
     padding: 0.5em 20px; /* Reduce padding for mobile */
-  }
-}
-
-@media (max-width: 480px) {
-  .main-slider .single-hero-slide {
-    height: 350px; /* Taller height for mobile */
-  }
-  .thumbnail-container .thumbnail-image {
-    width: 80px;
-    height: 50px;
   }
 }

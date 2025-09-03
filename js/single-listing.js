@@ -2,6 +2,8 @@ import { getPropertyDetails } from '../utils/storage/index.js';
 import { showLoader, removeLoader } from '../utils/loader/index.js';
 import { fetchAddressSuggestions } from '../utils/queries/index.js';
 import { initMap } from './map-active.js';
+import { setupFormspree } from '../js/formSpree.js'; // Import setupFormspree
+import { FORMSPREE_ENDPOINTS } from '../secrets.js'; // Import Formspree endpoints
 
 document.addEventListener('DOMContentLoaded', async () => {
   const listingsContent = document.querySelector('.listings-content');
@@ -160,6 +162,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     console.log('Coordinates before initMap:', coordinates); // Debugging
     initMap(coordinates, property.title);
+
+    // Setup Formspree for the contact form
+    const additionalData = {
+      propertyTitle: property.title,
+      propertyPrice: `₦${property.price.toLocaleString('en-NG')}`,
+      propertyLocation: property.location,
+      propertyDescription: property.description,
+      propertyBathrooms: property.bathrooms,
+      propertyGarage: property.garage,
+      propertySpace: `${property.space} sq ft`,
+      propertyFeatures: property.coreFeatures?.length > 0 ? property.coreFeatures.join(', ') : 'No features available'
+    };
+
+    setupFormspree({
+      formId: 'realtor-contact-form',
+      formspreeEndpoint: FORMSPREE_ENDPOINTS.property_inquiry,
+      successMessage: 'Thank you for your inquiry! We will get back to you soon.',
+      errorMessage: 'There was an error submitting your inquiry. Please try again.',
+      additionalData,
+      onSubmit: showLoader, // Show loader when form submission starts
+      onComplete: removeLoader // Remove loader when submission completes
+    });
+
   } catch (err) {
     console.error('Error loading single listing:', err);
     listingsContent.innerHTML = '<p class="text-center">Error loading property details. Please try again.</p>';
